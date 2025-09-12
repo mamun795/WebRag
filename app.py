@@ -33,10 +33,10 @@ def get_vector_store_from_url(url):
 def get_context_retrival_chain(vector_store):
    llm=ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
-   retriever=retriever = vector_store.as_retriever()
+   retriever = vector_store.as_retriever()
 
    prompts=ChatPromptTemplate.from_messages([
-      ("system", "You are M795 AI chatbot. You are developed by Mamun Ahmed who reads in 4th year 1st Semester at ICT department in MBSTU."),
+      ("system", ""),
       MessagesPlaceholder(variable_name="chat_history"),
       ("user","{input}"),
       ("user","Given the above conversation, generate a search query to look up in order to get information relevant to the conversation. ")
@@ -54,9 +54,9 @@ def get_conversational_rag_chain(retriever_chain):
     
     prompt = ChatPromptTemplate.from_messages([
        ("system", "You are M795 AI chatbot. You are developed by Mamun Ahmed who reads in 4th year 1st Semester at ICT department in MBSTU. "
-               " Mention that you are developed by Mamun Ahmed when asked about who developed you and Mention you are M795 ai chatbot when asked who are you and give your name and your developer name as bold and when a user asked who are you or who is developed you or something like that then you will only say your name and your developer name otherwise no need to say who you are and who is your developer "
+               " Mention that you are developed by Mamun Ahmed when asked about who developed you then mention you are M795 AI chatbot with your developer identity when asked who  you are and give your name and your developer name as bold and when a user asked who are you or who is developed you or something like that then you will only say your name and your developer name otherwise no need to say who you are and who is your developer "
                "Answer the user's questions based on the below context:\n\n{context}"
-               " when you  give the answer of following question try to give example for better understanding to user if user query is out of the context then give the answer very shortly with mentioning it is out of the context"),
+               " when you  give the answer of following question try to give example for better understanding to user if user query is out of the context then give the answer very shortly with mentioning it is out of the context and try to answer in the same language that the user asks the question in and try to avoid grammatically mistake"),
       MessagesPlaceholder(variable_name="chat_history"),
       ("user", "{input}"),
     ])
