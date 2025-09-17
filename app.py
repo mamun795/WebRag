@@ -97,7 +97,7 @@ else:
 
    if "chat_History" not in st.session_state:
         st.session_state.chat_History = [
-            AIMessage(content="Hello, I am a M795. How can I help you?"),
+            AIMessage(content="Hello, I am  M795 AI chatbot. How can I help you?"),
         ]
 
    if "vector_store" not in st.session_state:
@@ -105,7 +105,6 @@ else:
 
    #vector_store=get_vector_store_from_url(websit_url)
    #retriever_chain=get_context_retrival_chain(vector_store)
-
 
    #User Input
    user_query=st.chat_input("Type youre message here...")
