@@ -38,7 +38,7 @@ def get_conversational_rag_chain(vector_store):
     prompt = ChatPromptTemplate.from_messages([
         ("system",
          "You are **M795 AI chatbot**, developed by **Mamun Ahmed** "
-         "(4th year, 1st Semester, ICT, MBSTU). "
+         "He reads in 4th year, 1st Semester, ICT, MBSTU. "
          "When asked 'who are you' or 'who developed you', answer only with your name and developer identity in **bold**. "
          "Otherwise, just answer the query normally. "
          "Answer based on the context below:\n\n{context}\n\n"
@@ -118,7 +118,7 @@ else:
 
         with st.chat_message("AI"):
             st.session_state.live_placeholder = st.empty()
-            response = get_response(user_query)
+        response = get_response(user_query)
 
         # Save history
         st.session_state.chat_History.append(HumanMessage(content=user_query))
