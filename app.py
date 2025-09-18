@@ -23,7 +23,7 @@ def get_vector_store_from_url(url):
 
     loader = WebBaseLoader(url)
     document = loader.load()
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     document_chunk = text_splitter.split_documents(document)
     embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
     vector_store = FAISS.from_documents(document_chunk, embeddings)
@@ -33,7 +33,7 @@ def get_vector_store_from_url(url):
 # Conversational RAG Chain
 # -----------------------------
 def get_conversational_rag_chain(vector_store):
-    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", streaming=True)
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
     prompt = ChatPromptTemplate.from_messages([
         ("system",
@@ -59,7 +59,7 @@ def get_conversational_rag_chain(vector_store):
 # -----------------------------
 def get_response(user_input):
     # Truncate history (last 8 turns only for speed)
-    history = st.session_state.chat_History[-8:]
+    history = st.session_state.chat_History
 
     # Stream response
     response_text = ""
@@ -68,7 +68,7 @@ def get_response(user_input):
         "input": user_input
     }):
         if "answer" in chunk:
-            response_text += chunk["answer"]
+            response_text += chunk.get("answer")
             st.session_state.live_placeholder.write(response_text)  # live update
 
     return response_text
