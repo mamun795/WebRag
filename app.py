@@ -42,7 +42,6 @@ def get_conversational_rag_chain(vector_store):
          "When asked 'who are you' or 'who developed you', answer only with your name and developer identity in **bold**. "
          "Otherwise, just answer the query normally. "
          "Answer based on the context below:\n\n{context}\n\n"
-         "If out of context → reply briefly and mention it's out of context. "
          "Answer in the same language the user used. "
          "Avoid grammar mistakes, sometimes bold important words."
          ),
