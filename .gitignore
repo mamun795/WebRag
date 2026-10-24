@@ -1,3 +1,4 @@
 .env
+fastembed_cache/
 venv/
-# devcontainer.json
+.devcontainer/
